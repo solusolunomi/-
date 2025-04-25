@@ -1,55 +1,68 @@
+// 注文データを格納する配列
 let order = [];
 
+// 商品を追加する関数
 function addItem() {
+  // 入力された価格を取得
   const price = parseInt(document.getElementById("priceInput").value.replace(/,/g, ''));
-  if (!price) return;
+  if (!price) return; // 無効な入力は無視
 
+  // 商品データを作成して配列に追加
   const item = { price: price, quantity: 1 };
   order.push(item);
-  updateOrderList();
-  document.getElementById("priceInput").value = '';
+  updateOrderList(); // 注文リストを更新
+  document.getElementById("priceInput").value = ''; // 入力フィールドをクリア
 }
 
+// 注文リストを更新する関数
 function updateOrderList() {
   const orderList = document.getElementById("orderList");
-  orderList.innerHTML = '';
+  orderList.innerHTML = ''; // リストをクリア
   order.forEach((item, index) => {
+    // 各注文アイテムを表示
     const div = document.createElement('div');
     div.className = 'order-item';
-    div.style.display = 'flex';
-    div.style.alignItems = 'center';
-    div.style.gap = '10px';
-    div.style.marginBottom = '10px';
-
     div.innerHTML = `
-      <span style="width: 80px; font-size: 18px;">¥${formatNumberWithCommas(item.price)}</span>
-      <input type="number" value="${item.quantity}" min="1" onchange="changeQuantity(${index}, this.value)" style="width: 60px; height: 40px; font-size: 16px; padding: 5px;">
-      <button onclick="removeItem(${index})" style="height: 40px; padding: 0 16px; background-color: #e67e22; color: white; border: none; border-radius: 6px; font-size: 14px;">削除</button>
+      <span>¥${formatNumberWithCommas(item.price)}</span>
+      <input type="number" value="${item.quantity}" min="1" onchange="changeQuantity(${index}, this.value)">
+      <button onclick="removeItem(${index})">削除</button>
     `;
     orderList.appendChild(div);
   });
-  updateTotalPrice();
+  updateTotalPrice(); // 合計金額を更新
 }
 
+// 数量を変更する関数
 function changeQuantity(index, value) {
   order[index].quantity = parseInt(value);
   updateTotalPrice();
 }
 
+// 注文を削除する関数
 function removeItem(index) {
   order.splice(index, 1);
   updateOrderList();
 }
 
+// 数値をカンマ区切りにフォーマットする関数
 function formatNumberWithCommas(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// 合計金額を更新する関数
 function updateTotalPrice() {
   const total = order.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  document.getElementById("totalPrice").textContent = `合計金額: ¥${formatNumberWithCommas(total)}`;
+  const taxOption = document.querySelector('input[name="taxOption"]:checked').value;
+  let displayTotal = total;
+
+  if (taxOption === 'taxIncluded') {
+    displayTotal = Math.round(total * 1.1); // 税込み計算（10%）
+  }
+
+  document.getElementById("totalPrice").textContent = `合計金額: ¥${formatNumberWithCommas(displayTotal)}`;
 }
 
+// 注文をサーバーに送信する関数
 function submitOrder() {
   fetch('submit.php', {
     method: 'POST',
@@ -59,11 +72,12 @@ function submitOrder() {
   .then(response => response.text())
   .then(data => {
     alert("注文を保存しました: " + data);
-    order = [];
+    order = []; // 注文データをリセット
     updateOrderList();
   });
 }
 
+// 数字を入力フィールドに追加する関数
 function appendNumber(num) {
   const input = document.getElementById("priceInput");
   if (input.value === "0") {
@@ -73,12 +87,14 @@ function appendNumber(num) {
   }
 }
 
+// 入力フィールドの最後の文字を削除する関数
 function clearInput() {
   const input = document.getElementById("priceInput");
   const newValue = input.value.replace(/,/g, '').slice(0, -1);
   input.value = formatNumberWithCommas(newValue);
 }
 
+// 入力フィールドと注文データを全てクリアする関数
 function clearAllInput() {
   document.getElementById("priceInput").value = '';
   order = [];

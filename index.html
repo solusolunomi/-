@@ -1,15 +1,19 @@
+<!-- HTMLの基本構造 -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- メタ情報とスタイルシートのリンク -->
   <meta charset="UTF-8">
   <title>YSEレジ</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
+    <!-- 入力エリア -->
     <div class="input-area">
       <input type="text" id="priceInput" readonly>
       <div class="keypad">
+        <!-- 数字ボタン -->
         <button onclick="appendNumber(1)">1</button>
         <button onclick="appendNumber(2)">2</button>
         <button onclick="appendNumber(3)">3</button>
@@ -21,19 +25,31 @@
         <button onclick="appendNumber(9)">9</button>
         <button onclick="appendNumber(0)">0</button>
         <button onclick="appendNumber('00')">00</button>
+        <!-- 操作ボタン -->
         <button onclick="clearInput()" class="clear-btn">C</button>
+        <button onclick="addItem()" class="confirm-btn" id="kakutei">確定</button>
         <button onclick="clearAllInput()" class="ac-btn">AC</button>
-        <button onclick="addItem()" class="confirm-btn">確定</button>
       </div>
     </div>
+    <!-- 注文一覧エリア -->
     <div class="order-area">
       <h2>注文一覧</h2>
       <div id="orderList"></div>
       <div id="totalPrice">合計金額: ¥0</div>
+      <!-- 税抜き・税込み選択エリア -->
+      <div class="tax-selection">
+        <label>
+          <input type="radio" name="taxOption" value="taxExcluded" checked onchange="updateTotalPrice()"> 税抜き
+        </label>
+        <label>
+          <input type="radio" name="taxOption" value="taxIncluded" onchange="updateTotalPrice()"> 税込み
+        </label>
+      </div>
       <button class="submit-btn" onclick="submitOrder()">注文確定</button>
     </div>
   </div>
 
+  <!-- スクリプトファイルの読み込み -->
   <script src="script.js"></script>
 </body>
 </html>

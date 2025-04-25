@@ -1,6 +1,8 @@
+/* 全体のスタイル設定 */
 body {
+  /* 背景色とレイアウト */
   font-family: 'Arial', sans-serif;
-  background-color: #f9f9f9; /* 落ち着いた背景色 */
+  background-color: #f9f9f9;
   margin: 0;
   padding: 20px;
   display: flex;
@@ -10,6 +12,7 @@ body {
   box-sizing: border-box;
 }
 
+/* コンテナのスタイル */
 .container {
   display: flex;
   gap: 40px;
@@ -17,6 +20,7 @@ body {
   max-width: 1000px;
 }
 
+/* 入力エリアのスタイル */
 .input-area {
   flex: 1;
   background-color: #ffffff;
@@ -26,118 +30,105 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: none; /* 大枠を削除 */
 }
 
+/* 入力フィールドのスタイル */
 #priceInput {
   width: 100%;
   max-width: 300px;
-  font-size: 32px; /* 数字入力欄を大きく */
+  font-size: 32px;
   padding: 16px;
   text-align: right;
   margin-bottom: 20px;
-  border: 2px solid #4caf50; /* 緑の枠 */
+  border: 2px solid #4caf50;
   border-radius: 8px;
-  background-color: #f1f8e9; /* 薄い緑 */
+  background-color: #f1f8e9;
 }
 
+/* キーパッドのスタイル */
 .keypad {
+  /* グリッドレイアウト */
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3列のグリッド */
-  gap: 15px;
+  grid-template-columns: repeat(3, 1fr); /* 3列の均等グリッド */
+  gap: 15px 15px; /* 縦の間隔を短く、横の間隔はそのまま */
 }
 
 .keypad button {
+  /* ボタンの基本スタイル */
   font-size: 20px;
-  padding: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
   border: none;
   border-radius: 8px;
   background-color: #e0e0e0;
   color: #333;
   cursor: pointer;
-  height: 60px;
-  width: 100%;
+  height: 60px; /* ボタンの高さを均等に調整 */
+  width: 90px; /* ボタンの横幅を広くする */
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-
-.keypad button:last-child {
-  grid-column: auto;
+#kakutei{
+  width: 200px;
 }
 
-.keypad button.save-btn {
-  background-color: #4caf50; /* 保存ボタンの色 */
-  color: white;
-  width: 100%; /* 横幅を広げる */
-  max-width: 300px;
+.keypad button:hover {
+  /* ホバー時のスタイル */
+  background-color: #d6d6d6; /* カーソルが重なったときの背景色 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ホバー時の影を追加 */
+  transform: scale(1.05); /* ボタンを少し拡大 */
 }
 
-.keypad button.save-btn:hover {
-  background-color: #45a049;
-}
-
+/* 特定のボタンのスタイル */
 .keypad .clear-btn {
-  background-color: #f44336; /* Cボタンの色 */
+  background-color: #f44336;
   color: white;
-  grid-column: 3; /* Cボタンを3列目に配置 */
-}
-
-.keypad .clear-btn:hover {
-  background-color: #e53935;
 }
 
 .keypad .ac-btn {
-  background-color: #ff9800; /* ACボタンの色 */
+  background-color: #ff9800;
   color: white;
-  grid-column: 3; /* ACボタンを3列目に配置 */
-}
-
-.keypad .ac-btn:hover {
-  background-color: #fb8c00;
 }
 
 .keypad .confirm-btn {
-  grid-column: 2; /* 確定ボタンを2列目に配置 */
-  background-color: #4caf50; /* 確定ボタンの色 */
+  background-color: #4caf50;
   color: white;
-  font-size: 20px;
-  padding: 15px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  grid-column: span 2;
 }
 
+/* 注文エリアのスタイル */
 .order-area {
   flex: 1;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-  border: none; /* 注文一覧の枠を削除 */
 }
 
 #orderList {
-  border: 1px solid #ccc; /* 枠線を追加 */
+  /* 注文リストのスタイル */
+  border: 1px solid #ccc;
   border-radius: 8px;
   padding: 10px;
-  background-color: #f9f9f9; /* 背景色を追加 */
+  background-color: #f9f9f9;
   margin-bottom: 20px;
 }
 
 .order-item {
+  /* 注文アイテムのスタイル */
   display: flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 15px;
   padding: 10px;
-  border: 1px solid #ddd; /* 個別の枠線 */
+  border: 1px solid #ddd;
   border-radius: 6px;
-  background-color: #ffffff; /* 白背景 */
+  background-color: #ffffff;
 }
 
 .order-item span {
   width: 100px;
   font-size: 20px;
-  color: #388e3c; /* 濃い緑 */
+  color: #388e3c;
 }
 
 .order-item input[type="number"] {
@@ -147,13 +138,13 @@ body {
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #f1f8e9; /* 薄い緑 */
+  background-color: #f1f8e9;
 }
 
 .order-item button {
   height: 45px;
   padding: 0 20px;
-  background-color: #ff7043; /* 明るいオレンジ */
+  background-color: #ff7043;
   color: white;
   border: none;
   border-radius: 8px;
@@ -163,30 +154,27 @@ body {
 }
 
 .order-item button:hover {
-  background-color: #f4511e; /* 濃いオレンジ */
+  background-color: #f4511e;
 }
 
+/* 合計金額のスタイル */
 #totalPrice {
   font-size: 22px;
   margin-top: 20px;
   font-weight: bold;
-  color: #2e7d32; /* 濃い緑 */
+  color: #2e7d32;
 }
 
+/* 注文確定ボタンのスタイル */
 .submit-btn {
   margin-top: 20px;
   padding: 14px 28px;
-  background-color: #66bb6a; /* 明るい緑 */
+  background-color: #66bb6a;
   color: white;
   font-size: 18px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  width: 100%; /* 横幅を広げる */
+  width: 100%;
   max-width: 300px;
-}
-
-.submit-btn:hover {
-  background-color: #43a047; /* 濃い緑 */
 }
