@@ -1,0 +1,192 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9; /* 落ち着いた背景色 */
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.input-area {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none; /* 大枠を削除 */
+}
+
+#priceInput {
+  width: 100%;
+  max-width: 300px;
+  font-size: 32px; /* 数字入力欄を大きく */
+  padding: 16px;
+  text-align: right;
+  margin-bottom: 20px;
+  border: 2px solid #4caf50; /* 緑の枠 */
+  border-radius: 8px;
+  background-color: #f1f8e9; /* 薄い緑 */
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3列のグリッド */
+  gap: 15px;
+}
+
+.keypad button {
+  font-size: 20px;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #e0e0e0;
+  color: #333;
+  cursor: pointer;
+  height: 60px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.keypad button:last-child {
+  grid-column: auto;
+}
+
+.keypad button.save-btn {
+  background-color: #4caf50; /* 保存ボタンの色 */
+  color: white;
+  width: 100%; /* 横幅を広げる */
+  max-width: 300px;
+}
+
+.keypad button.save-btn:hover {
+  background-color: #45a049;
+}
+
+.keypad .clear-btn {
+  background-color: #f44336; /* Cボタンの色 */
+  color: white;
+  grid-column: 3; /* Cボタンを3列目に配置 */
+}
+
+.keypad .clear-btn:hover {
+  background-color: #e53935;
+}
+
+.keypad .ac-btn {
+  background-color: #ff9800; /* ACボタンの色 */
+  color: white;
+  grid-column: 3; /* ACボタンを3列目に配置 */
+}
+
+.keypad .ac-btn:hover {
+  background-color: #fb8c00;
+}
+
+.keypad .confirm-btn {
+  grid-column: 2; /* 確定ボタンを2列目に配置 */
+  background-color: #4caf50; /* 確定ボタンの色 */
+  color: white;
+  font-size: 20px;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.order-area {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  border: none; /* 注文一覧の枠を削除 */
+}
+
+#orderList {
+  border: 1px solid #ccc; /* 枠線を追加 */
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f9f9f9; /* 背景色を追加 */
+  margin-bottom: 20px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd; /* 個別の枠線 */
+  border-radius: 6px;
+  background-color: #ffffff; /* 白背景 */
+}
+
+.order-item span {
+  width: 100px;
+  font-size: 20px;
+  color: #388e3c; /* 濃い緑 */
+}
+
+.order-item input[type="number"] {
+  width: 60px;
+  height: 40px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f1f8e9; /* 薄い緑 */
+}
+
+.order-item button {
+  height: 45px;
+  padding: 0 20px;
+  background-color: #ff7043; /* 明るいオレンジ */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.order-item button:hover {
+  background-color: #f4511e; /* 濃いオレンジ */
+}
+
+#totalPrice {
+  font-size: 22px;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #2e7d32; /* 濃い緑 */
+}
+
+.submit-btn {
+  margin-top: 20px;
+  padding: 14px 28px;
+  background-color: #66bb6a; /* 明るい緑 */
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  width: 100%; /* 横幅を広げる */
+  max-width: 300px;
+}
+
+.submit-btn:hover {
+  background-color: #43a047; /* 濃い緑 */
+}

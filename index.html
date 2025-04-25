@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>YSEレジ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="input-area">
+      <input type="text" id="priceInput" readonly>
+      <div class="keypad">
+        <button onclick="appendNumber(1)">1</button>
+        <button onclick="appendNumber(2)">2</button>
+        <button onclick="appendNumber(3)">3</button>
+        <button onclick="appendNumber(4)">4</button>
+        <button onclick="appendNumber(5)">5</button>
+        <button onclick="appendNumber(6)">6</button>
+        <button onclick="appendNumber(7)">7</button>
+        <button onclick="appendNumber(8)">8</button>
+        <button onclick="appendNumber(9)">9</button>
+        <button onclick="appendNumber(0)">0</button>
+        <button onclick="appendNumber('00')">00</button>
+        <button onclick="clearInput()" class="clear-btn">C</button>
+        <button onclick="clearAllInput()" class="ac-btn">AC</button>
+        <button onclick="addItem()" class="confirm-btn">確定</button>
+      </div>
+    </div>
+    <div class="order-area">
+      <h2>注文一覧</h2>
+      <div id="orderList"></div>
+      <div id="totalPrice">合計金額: ¥0</div>
+      <button class="submit-btn" onclick="submitOrder()">注文確定</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
