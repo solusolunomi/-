@@ -78,15 +78,23 @@ function submitOrder() {
 // 数字を入力フィールドに追加する関数
 function appendNumber(num) {
   const input = document.getElementById("priceInput");
-  const currentValue = input.value.replace(/,/g, '');
+  let currentValue = input.value.replace(/,/g, '');
 
-  if (currentValue === "0") {
-    input.value = num; // 先頭が0の場合は新しい数字に置き換える
-  } else if (currentValue === "00") {
-    input.value = num; // 先頭が00の場合も新しい数字に置き換える
-  } else {
-    input.value = formatNumberWithCommas(currentValue + num);
+  // 0または00が先頭に来ないように制御
+  if ((num === 0 || num === "00") && currentValue === "") {
+    return; // 何も入力されていない場合は0や00を無視
   }
+
+  // 00が連続で押されないように制御
+  if (num === "00" && currentValue.endsWith("00")) {
+    return; // すでに末尾が00の場合は無視
+  }
+
+  // 新しい値を設定
+  const newValue = (currentValue + num).replace(/^0+/, ""); // 先頭の不要な0を削除
+
+  // 入力フィールドに値を設定
+  input.value = formatNumberWithCommas(newValue);
 }
 
 // 入力フィールドの最後の文字を削除する関数
