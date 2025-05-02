@@ -80,20 +80,20 @@ function appendNumber(num) {
   const input = document.getElementById("priceInput");
   let currentValue = input.value.replace(/,/g, '');
 
-  // 0または00が先頭に来ないように制御
+  // 1. 入力が空の場合、0や00を無視
   if ((num === 0 || num === "00") && currentValue === "") {
-    return; // 何も入力されていない場合は0や00を無視
+    return; // 何も入力されていない場合は無視
   }
 
-  // 00が連続で押されないように制御
-  if (num === "00" && currentValue.endsWith("00")) {
-    return; // すでに末尾が00の場合は無視
+  // 2. 新しい値を設定
+  let newValue = currentValue + num;
+
+  // 3. 先頭に不要な0が残らないように制御
+  if (/^0+/.test(newValue)) {
+    newValue = newValue.replace(/^0+/, "0"); // 先頭の0を1つだけ残す
   }
 
-  // 新しい値を設定
-  const newValue = (currentValue + num).replace(/^0+/, ""); // 先頭の不要な0を削除
-
-  // 入力フィールドに値を設定
+  // 4. 入力フィールドに値を設定
   input.value = formatNumberWithCommas(newValue);
 }
 
