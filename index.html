@@ -11,6 +11,7 @@
   <div class="container">
     <!-- 入力エリア -->
     <div class="input-area">
+      <!-- 金額入力フィールド（読み取り専用） -->
       <input type="text" id="priceInput" readonly>
       <div class="keypad">
         <!-- 数字ボタン -->
@@ -34,7 +35,9 @@
     <!-- 注文一覧エリア -->
     <div class="order-area">
       <h2>注文一覧</h2>
+      <!-- 注文リスト -->
       <div id="orderList"></div>
+      <!-- 合計金額表示 -->
       <div id="totalPrice">合計金額: ¥0</div>
       <!-- 税抜き・税込み選択エリア -->
       <div class="tax-selection">
@@ -45,6 +48,7 @@
           <input type="radio" name="taxOption" value="taxIncluded" onchange="updateTotalPrice()"> 税込み
         </label>
       </div>
+      <!-- 注文確定ボタン -->
       <button class="submit-btn" onclick="submitOrder()">注文確定</button>
     </div>
   </div>

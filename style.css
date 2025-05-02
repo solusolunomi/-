@@ -1,6 +1,5 @@
 /* 全体のスタイル設定 */
 body {
-  /* 背景色とレイアウト */
   font-family: 'Arial', sans-serif;
   background-color: #f9f9f9;
   margin: 0;
@@ -32,7 +31,7 @@ body {
   align-items: center;
 }
 
-/* 入力フィールドのスタイル */
+/* 金額入力フィールドのスタイル */
 #priceInput {
   width: 100%;
   max-width: 300px;
@@ -47,35 +46,28 @@ body {
 
 /* キーパッドのスタイル */
 .keypad {
-  /* グリッドレイアウト */
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3列の均等グリッド */
-  gap: 15px 15px; /* 縦の間隔を短く、横の間隔はそのまま */
+  gap: 15px 15px; /* 縦横の間隔 */
 }
 
 .keypad button {
-  /* ボタンの基本スタイル */
   font-size: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 10px;
   border: none;
   border-radius: 8px;
   background-color: #e0e0e0;
   color: #333;
   cursor: pointer;
-  height: 60px; /* ボタンの高さを均等に調整 */
-  width: 90px; /* ボタンの横幅を広くする */
+  height: 60px;
+  width: 90px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-#kakutei{
-  width: 200px;
 }
 
 .keypad button:hover {
-  /* ホバー時のスタイル */
-  background-color: #d6d6d6; /* カーソルが重なったときの背景色 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ホバー時の影を追加 */
-  transform: scale(1.05); /* ボタンを少し拡大 */
+  background-color: #d6d6d6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
 
 /* 特定のボタンのスタイル */
@@ -102,59 +94,6 @@ body {
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-
-#orderList {
-  /* 注文リストのスタイル */
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  background-color: #f9f9f9;
-  margin-bottom: 20px;
-}
-
-.order-item {
-  /* 注文アイテムのスタイル */
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 15px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background-color: #ffffff;
-}
-
-.order-item span {
-  width: 100px;
-  font-size: 20px;
-  color: #388e3c;
-}
-
-.order-item input[type="number"] {
-  width: 60px;
-  height: 40px;
-  font-size: 16px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f1f8e9;
-}
-
-.order-item button {
-  height: 45px;
-  padding: 0 20px;
-  background-color: #ff7043;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.order-item button:hover {
-  background-color: #f4511e;
 }
 
 /* 合計金額のスタイル */

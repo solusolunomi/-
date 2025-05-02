@@ -3,13 +3,11 @@ let order = [];
 
 // 商品を追加する関数
 function addItem() {
-  // 入力された価格を取得
   const price = parseInt(document.getElementById("priceInput").value.replace(/,/g, ''));
   if (!price) return; // 無効な入力は無視
 
-  // 商品データを作成して配列に追加
   const item = { price: price, quantity: 1 };
-  order.push(item);
+  order.push(item); // 商品を注文リストに追加
   updateOrderList(); // 注文リストを更新
   document.getElementById("priceInput").value = ''; // 入力フィールドをクリア
 }
@@ -19,7 +17,6 @@ function updateOrderList() {
   const orderList = document.getElementById("orderList");
   orderList.innerHTML = ''; // リストをクリア
   order.forEach((item, index) => {
-    // 各注文アイテムを表示
     const div = document.createElement('div');
     div.className = 'order-item';
     div.innerHTML = `
@@ -78,12 +75,17 @@ function submitOrder() {
 }
 
 // 数字を入力フィールドに追加する関数
+// 数字を入力フィールドに追加する関数
 function appendNumber(num) {
   const input = document.getElementById("priceInput");
-  if (input.value === "0") {
-    input.value = num;
+  const currentValue = input.value.replace(/,/g, '');
+
+  if (currentValue === "0") {
+    input.value = num; // 先頭が0の場合は新しい数字に置き換える
+  } else if (currentValue === "00") {
+    input.value = num; // 先頭が00の場合も新しい数字に置き換える
   } else {
-    input.value = formatNumberWithCommas(input.value.replace(/,/g, '') + num);
+    input.value = formatNumberWithCommas(currentValue + num);
   }
 }
 
