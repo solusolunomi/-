@@ -111,7 +111,7 @@ function submitOrder() {
 
 
 // 隠しコマンド
-const secretSequence = ["1", "2", "3", "4"];
+const secretSequence = ["2", "4", "0", "0", "6", "6"];
 let sequenceIndex = 0;
 
 function checkSequence(num) {
@@ -131,6 +131,7 @@ function checkSequence(num) {
     sequenceIndex = 0;
   }
 }
+
 
 // ✅ 日時更新
 function updateDateTime() {
