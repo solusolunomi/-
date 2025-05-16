@@ -1,20 +1,29 @@
-<!-- HTMLの基本構造 -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <!-- メタ情報とスタイルシートのリンク -->
   <meta charset="UTF-8">
-  <title>YSEレジ</title>
+  <title>K2SIレジシステム</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="fade-overlay"></div>
+  <div id="tetris-loading">TETRIS 起動中...</div>
+
+  <!-- ヘッダー -->
+  <header class="main-header">
+    <h1>K2SIレジシステム</h1>
+  </header>
+
+  <!-- ✅ 営業日表示（ヘッダー直下・左上） -->
+  <div id="datetime-area">
+    <p id="datetime"></p>
+  </div>
+
+  <!-- メインのコンテンツ -->
   <div class="container">
-    <!-- 入力エリア -->
     <div class="input-area">
-      <!-- 金額入力フィールド（読み取り専用） -->
       <input type="text" id="priceInput" readonly>
       <div class="keypad">
-        <!-- 数字ボタン -->
         <button onclick="appendNumber(1)">1</button>
         <button onclick="appendNumber(2)">2</button>
         <button onclick="appendNumber(3)">3</button>
@@ -26,34 +35,29 @@
         <button onclick="appendNumber(9)">9</button>
         <button onclick="appendNumber(0)">0</button>
         <button onclick="appendNumber('00')">00</button>
-        <!-- 操作ボタン -->
         <button onclick="clearInput()" class="clear-btn">C</button>
         <button onclick="addItem()" class="confirm-btn" id="kakutei">確定</button>
         <button onclick="clearAllInput()" class="ac-btn">AC</button>
       </div>
     </div>
-    <!-- 注文一覧エリア -->
+
     <div class="order-area">
       <h2>注文一覧</h2>
-      <!-- 注文リスト -->
       <div id="orderList"></div>
-      <!-- 合計金額表示 -->
       <div id="totalPrice">合計金額: ¥0</div>
-      <!-- 税抜き・税込み選択エリア -->
       <div class="tax-selection">
-        <label>
-          <input type="radio" name="taxOption" value="taxExcluded" checked onchange="updateTotalPrice()"> 税抜き
-        </label>
-        <label>
-          <input type="radio" name="taxOption" value="taxIncluded" onchange="updateTotalPrice()"> 税込み
-        </label>
+        <label><input type="radio" name="taxOption" value="taxExcluded" checked onchange="updateTotalPrice()"> 税抜き</label>
+        <label><input type="radio" name="taxOption" value="taxIncluded" onchange="updateTotalPrice()"> 税込み</label>
       </div>
-      <!-- 注文確定ボタン -->
       <button class="submit-btn" onclick="submitOrder()">注文確定</button>
     </div>
   </div>
 
-  <!-- スクリプトファイルの読み込み -->
+  <!-- フッター -->
+  <footer class="main-footer">
+    <p>&copy; 2025 AppA Team K2SI. All rights reserved.</p>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>

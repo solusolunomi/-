@@ -1,21 +1,59 @@
-// 注文データを格納する配列
 let order = [];
 
-// 商品を追加する関数
-function addItem() {
-  const price = parseInt(document.getElementById("priceInput").value.replace(/,/g, ''));
-  if (!price) return; // 無効な入力は無視
+function appendNumber(num) {
+  checkSequence(num);
 
-  const item = { price: price, quantity: 1 };
-  order.push(item); // 商品を注文リストに追加
-  updateOrderList(); // 注文リストを更新
-  document.getElementById("priceInput").value = ''; // 入力フィールドをクリア
+  const input = document.getElementById("priceInput");
+  let currentValue = input.value.replace(/,/g, '');
+
+  if ((num === 0 || num === "00") && currentValue === "") return;
+
+  let newValue = currentValue + num;
+  if (/^0+/.test(newValue)) {
+    newValue = newValue.replace(/^0+/, "0");
+  }
+
+  input.value = formatNumberWithCommas(newValue);
 }
 
-// 注文リストを更新する関数
+function clearInput() {
+  const input = document.getElementById("priceInput");
+  const newValue = input.value.replace(/,/g, '').slice(0, -1);
+  input.value = formatNumberWithCommas(newValue);
+}
+
+function clearAllInput() {
+  document.getElementById("priceInput").value = '';
+  order = [];
+  updateOrderList();
+}
+
+function formatNumberWithCommas(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function addItem() {
+  const price = parseInt(document.getElementById("priceInput").value.replace(/,/g, ''));
+  if (!price) return;
+  const item = { price: price, quantity: 1 };
+  order.push(item);
+  updateOrderList();
+  document.getElementById("priceInput").value = '';
+}
+
+function changeQuantity(index, value) {
+  order[index].quantity = parseInt(value);
+  updateTotalPrice();
+}
+
+function removeItem(index) {
+  order.splice(index, 1);
+  updateOrderList();
+}
+
 function updateOrderList() {
   const orderList = document.getElementById("orderList");
-  orderList.innerHTML = ''; // リストをクリア
+  orderList.innerHTML = '';
   order.forEach((item, index) => {
     const div = document.createElement('div');
     div.className = 'order-item';
@@ -26,87 +64,60 @@ function updateOrderList() {
     `;
     orderList.appendChild(div);
   });
-  updateTotalPrice(); // 合計金額を更新
-}
-
-// 数量を変更する関数
-function changeQuantity(index, value) {
-  order[index].quantity = parseInt(value);
   updateTotalPrice();
 }
 
-// 注文を削除する関数
-function removeItem(index) {
-  order.splice(index, 1);
-  updateOrderList();
-}
-
-// 数値をカンマ区切りにフォーマットする関数
-function formatNumberWithCommas(number) {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-// 合計金額を更新する関数
 function updateTotalPrice() {
   const total = order.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const taxOption = document.querySelector('input[name="taxOption"]:checked').value;
   let displayTotal = total;
-
   if (taxOption === 'taxIncluded') {
-    displayTotal = Math.round(total * 1.1); // 税込み計算（10%）
+    displayTotal = Math.round(total * 1.1);
   }
-
   document.getElementById("totalPrice").textContent = `合計金額: ¥${formatNumberWithCommas(displayTotal)}`;
 }
 
-// 注文をサーバーに送信する関数
 function submitOrder() {
   fetch('submit.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(order)
-  })
-  .then(response => response.text())
-  .then(data => {
+  }).then(res => res.text()).then(data => {
     alert("注文を保存しました: " + data);
-    order = []; // 注文データをリセット
+    order = [];
     updateOrderList();
   });
 }
 
-// 数字を入力フィールドに追加する関数
-// 数字を入力フィールドに追加する関数
-function appendNumber(num) {
-  const input = document.getElementById("priceInput");
-  let currentValue = input.value.replace(/,/g, '');
+// 隠しコマンド
+const secretSequence = ["1", "2", "3", "4"];
+let sequenceIndex = 0;
 
-  // 1. 入力が空の場合、0や00を無視
-  if ((num === 0 || num === "00") && currentValue === "") {
-    return; // 何も入力されていない場合は無視
+function checkSequence(num) {
+  if (num.toString() === secretSequence[sequenceIndex]) {
+    sequenceIndex++;
+    if (sequenceIndex === secretSequence.length) {
+      const overlay = document.getElementById("fade-overlay");
+      const loadingText = document.getElementById("tetris-loading");
+      overlay.classList.add("active");
+      loadingText.classList.add("active");
+      setTimeout(() => {
+        window.location.href = "テトリス/index.html";
+      }, 1000);
+      sequenceIndex = 0;
+    }
+  } else {
+    sequenceIndex = 0;
   }
-
-  // 2. 新しい値を設定
-  let newValue = currentValue + num;
-
-  // 3. 先頭に不要な0が残らないように制御
-  if (/^0+/.test(newValue)) {
-    newValue = newValue.replace(/^0+/, "0"); // 先頭の0を1つだけ残す
-  }
-
-  // 4. 入力フィールドに値を設定
-  input.value = formatNumberWithCommas(newValue);
 }
 
-// 入力フィールドの最後の文字を削除する関数
-function clearInput() {
-  const input = document.getElementById("priceInput");
-  const newValue = input.value.replace(/,/g, '').slice(0, -1);
-  input.value = formatNumberWithCommas(newValue);
+// ✅ 日時更新
+function updateDateTime() {
+  const now = new Date();
+  const days = ['日', '月', '火', '水', '木', '金', '土'];
+  const formatted = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日（${days[now.getDay()]}） ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+  document.getElementById("datetime").textContent = `本日の営業日: ${formatted}`;
 }
 
-// 入力フィールドと注文データを全てクリアする関数
-function clearAllInput() {
-  document.getElementById("priceInput").value = '';
-  order = [];
-  updateOrderList();
-}
+updateDateTime();
+setInterval(updateDateTime, 1000);
