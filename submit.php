@@ -1,27 +1,37 @@
 <?php
-// データベース接続情報
 $host = 'localhost';
 $dbname = 'yse_pos';
 $user = 'root';
 $password = '';
 
 try {
-    // データベース接続を確立
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // クライアントから送信されたJSONデータを取得
     $data = json_decode(file_get_contents('php://input'), true);
 
-    // データベースに注文データを挿入
-    $stmt = $pdo->prepare("INSERT INTO orders (price, quantity) VALUES (:price, :quantity)");
-    foreach ($data as $item) {
-        $stmt->execute($item);
+    // 受信確認：配列でなければエラー
+    if (!is_array($data) || !isset($data[0]['price'])) {
+        http_response_code(400);
+        echo "受信データが不正です";
+        exit;
     }
 
-    // 成功メッセージを返す
-    echo "注文が保存されました";
+    $stmt = $pdo->prepare("INSERT INTO orders (price, quantity) VALUES (:price, :quantity)");
+    $total = 0;
+
+    foreach ($data as $item) {
+        $price = $item['price'];
+        $quantity = $item['quantity'];
+        $stmt->execute([
+            ':price' => $price,
+            ':quantity' => $quantity
+        ]);
+        $total += $price * $quantity;
+    }
+
+    echo "注文が保存されました：¥" . number_format($total);
 } catch (PDOException $e) {
-    // エラーメッセージを返す
+    http_response_code(500);
     echo "エラー: " . $e->getMessage();
 }
