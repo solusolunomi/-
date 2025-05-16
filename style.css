@@ -1,19 +1,19 @@
-/* ベース */
+/* --- ベース --- */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f9f9f9;
+  background: #f9f9f9;
   margin: 0;
-  padding: 100px 20px 60px 20px; /* 上ヘッダーに合わせて調整 */
+  padding: 100px 20px 60px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* ヘッダー */
+/* --- ヘッダー --- */
 .main-header {
   width: 100%;
   text-align: center;
-  background-color: #4caf50;
+  background: #4caf50;
   color: white;
   padding: 8px 0;
   font-size: 12px;
@@ -25,12 +25,11 @@ body {
   z-index: 1000;
 }
 
-/* ✅ 営業日表示 */
+/* --- 営業日表示 --- */
 #datetime-area {
   width: 100%;
   max-width: 1000px;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin: 10px 0 20px 0;
   text-align: left;
   padding-left: 10px;
 }
@@ -41,7 +40,7 @@ body {
   font-weight: bold;
 }
 
-/* コンテナ */
+/* --- メインレイアウト --- */
 .container {
   display: flex;
   gap: 40px;
@@ -49,10 +48,10 @@ body {
   max-width: 1000px;
 }
 
-/* 入力エリア */
+/* --- 入力エリア --- */
 .input-area {
   flex: 1;
-  background-color: #ffffff;
+  background: #fff;
   padding: 30px;
   border-radius: 16px;
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
@@ -70,9 +69,10 @@ body {
   margin-bottom: 20px;
   border: 2px solid #4caf50;
   border-radius: 8px;
-  background-color: #f1f8e9;
+  background: #f1f8e9;
 }
 
+/* --- キーパッド --- */
 .keypad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -83,40 +83,51 @@ body {
   font-size: 20px;
   border: none;
   border-radius: 8px;
-  background-color: #e0e0e0;
+  background: #e0e0e0;
   color: #333;
   cursor: pointer;
   height: 60px;
   width: 90px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+.keypad button:hover {
+  background: #d6d6d6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px) scale(1.03);
 }
 
 .keypad .clear-btn {
-  background-color: #f44336;
+  background: #f44336;
   color: white;
 }
 
 .keypad .ac-btn {
-  background-color: #ff9800;
+  background: #ff9800;
   color: white;
 }
 
 .keypad .confirm-btn {
-  background-color: #4caf50;
+  background: #4caf50;
   color: white;
-  grid-column: span 2;
+  width: 100%;
+  max-width: 280px;
+  grid-column: span 3;
+  font-size: 20px;
+  height: 60px;
 }
 
-/* 注文エリア */
+/* --- 注文エリア --- */
 .order-area {
   flex: 1;
-  background-color: #ffffff;
+  background: #fff;
   padding: 30px;
   border-radius: 16px;
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
-/* 合計・送信 */
+/* --- 合計表示 --- */
 #totalPrice {
   font-size: 22px;
   margin-top: 20px;
@@ -127,7 +138,7 @@ body {
 .submit-btn {
   margin-top: 20px;
   padding: 14px 28px;
-  background-color: #66bb6a;
+  background: #66bb6a;
   color: white;
   font-size: 18px;
   border: none;
@@ -137,11 +148,11 @@ body {
   max-width: 300px;
 }
 
-/* フッター */
+/* --- フッター --- */
 .main-footer {
   width: 100%;
   text-align: center;
-  background-color: #e0e0e0;
+  background: #e0e0e0;
   color: #333;
   padding: 4px 0;
   font-size: 12px;
@@ -152,7 +163,7 @@ body {
   z-index: 1000;
 }
 
-/* テトリス演出 */
+/* --- テトリス演出 --- */
 #fade-overlay {
   position: fixed;
   top: 0;
