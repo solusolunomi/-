@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'yse_pos';
+$dbname = 'k2si'; // ← あなたのDB名に合わせて変更
 $user = 'root';
 $password = '';
 
@@ -10,29 +10,22 @@ try {
 
     $data = json_decode(file_get_contents('php://input'), true);
 
-    // 受信確認：配列でなければエラー
-    if (!is_array($data) || !isset($data[0]['price'])) {
+    if (empty($data)) {
         http_response_code(400);
-        echo "受信データが不正です";
+        echo "データが空です";
         exit;
     }
 
-    $stmt = $pdo->prepare("INSERT INTO orders (price, quantity) VALUES (:price, :quantity)");
-    $total = 0;
+    $stmt = $pdo->prepare("INSERT INTO K2SI_pos (price) VALUES (:price)");
 
     foreach ($data as $item) {
-        $price = $item['price'];
-        $quantity = $item['quantity'];
-        $stmt->execute([
-            ':price' => $price,
-            ':quantity' => $quantity
-        ]);
-        $total += $price * $quantity;
+        $stmt->bindValue(':price', $item['price'], PDO::PARAM_INT);
+        $stmt->execute();
     }
 
-    echo "注文が保存されました：¥" . number_format($total);
+    echo "保存成功";
 } catch (PDOException $e) {
     http_response_code(500);
     echo "エラー: " . $e->getMessage();
 }
-
+?>

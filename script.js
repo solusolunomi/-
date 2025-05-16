@@ -80,29 +80,27 @@ function updateTotalPrice() {
 function submitOrder() {
   const taxOption = document.querySelector('input[name="taxOption"]:checked').value;
 
-  // 税込みの場合は価格を1.1倍に変換して新しい配列を作成
+  // 税込み処理＋個数反映済みの合計を送信
   const sendingItems = order.map(item => {
     const taxedPrice = (taxOption === 'taxIncluded')
       ? Math.round(item.price * 1.1)
       : item.price;
     return {
-      price: taxedPrice,
-      quantity: item.quantity
+      price: taxedPrice * item.quantity  // ← ここで数量をかけておく！
     };
   });
 
-  
-  // 合計金額を計算（送信する税込み or 税抜き価格で）
-  const total = sendingItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  // 合計金額を計算（送信前確認用）
+  const total = sendingItems.reduce((sum, item) => sum + item.price, 0);
 
   fetch('submit.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(sendingItems) // ← ここ重要：税込み価格を含んだ配列
+    body: JSON.stringify(sendingItems)
   })
   .then(res => res.text())
   .then(data => {
-    alert(`注文を保存しました：¥${total.toLocaleString()}`);
+    alert(`注文を保存しました: ¥${total.toLocaleString()}`);
     order = [];
     updateOrderList();
   })
@@ -110,8 +108,6 @@ function submitOrder() {
     console.error("送信エラー:", error);
   });
 }
-
-
 
 
 // 隠しコマンド
