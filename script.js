@@ -91,6 +91,7 @@ function submitOrder() {
     };
   });
 
+  
   // 合計金額を計算（送信する税込み or 税抜き価格で）
   const total = sendingItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
