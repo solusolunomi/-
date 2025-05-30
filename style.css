@@ -201,7 +201,7 @@ body {
   transform: translate(-50%, -50%) scale(1.2);
 }
 .submit-btn:hover {
-  background-color: #5aa65c;
+  background-color: #d6d6d6; /* ← 数字ボタンと同じ */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transform: translateY(-2px) scale(1.03);
   transition: all 0.2s ease;
